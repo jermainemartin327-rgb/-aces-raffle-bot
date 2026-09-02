@@ -70,7 +70,7 @@ def is_admin(interaction: discord.Interaction) -> bool:
 
 
  def money(v):
-    return f"${v:,.0f}" if float(v).is_integer() else f"${v:,.2f}
+     return f"${v:,.0f}" if float(v).is_integer() else f"${v:,.2f}
 
 
 class RaffleBot(commands.Bot):

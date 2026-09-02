@@ -57,11 +57,13 @@ def get_slots():
 
 
 def is_admin(interaction: discord.Interaction) -> bool:
+    OWNER_ID = 1443381921651626046
+
+    if interaction.user.id == OWNER_ID:
+        return True
+
     if interaction.guild is None:
         return False
-
-    if interaction.user.id == interaction.guild.owner_id:
-        return True
 
     perms = interaction.user.guild_permissions
     return perms.administrator or perms.manage_guild

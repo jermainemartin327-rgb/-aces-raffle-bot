@@ -57,11 +57,16 @@ def get_slots():
 
 
 def is_admin(interaction: discord.Interaction) -> bool:
+    if interaction.guild is None:
+        return False
+
+    if interaction.user.id == interaction.guild.owner_id:
+        return True
+
     perms = interaction.user.guild_permissions
     return perms.administrator or perms.manage_guild
 
 
-def money(v):
     return f"${v:,.0f}" if float(v).is_integer() else f"${v:,.2f}"
 
 

@@ -69,9 +69,10 @@ def is_admin(interaction: discord.Interaction) -> bool:
     return perms.administrator or perms.manage_guild
 
 
- def money(v):
+def money(v):
     return f"${v:,.0f}" if float(v).is_integer() else f"${v:,.2f}"
 
+class RaffleBot(commands.Bot): 
 class RaffleBot(commands.Bot):
 
 

@@ -249,7 +249,7 @@ async def slots(interaction: discord.Interaction):
         f"🎉 **RANDOMIZER STATUS** 🎉\n"
         f"━━━━━━━━━━━━━━━━━━━━\n"
         f"🏆 **Prize:** {raffle['prize']}\n"
-        f"💰 **Donation:** {money(raffle['entry_fee
+                f"💰 **Donation:** {money(raffle['entry_fee'])}\n"
                 f"📊 **Spots:** {progress_bar} {filled}/{total_slots}\n"
         f"🏆 **Winners:** 1\n"
         f"━━━━━━━━━━━━━━━━━━━━\n"

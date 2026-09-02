@@ -238,17 +238,35 @@ async def slots(interaction: discord.Interaction):
     if current:
         chunks.append(current)
 
+    total_slots = raffle["slot_count"]
+    filled = claimed
+
+    bar_length = 20
+    filled_blocks = round((filled / total_slots) * bar_length)
+    progress_bar = "█" * filled_blocks + "░" * (bar_length - filled_blocks)
+
     header = (
-        f"🎰 **{raffle['title']}**\n"
+        f"🎉 **RANDOMIZER STATUS** 🎉\n"
+        f"━━━━━━━━━━━━━━━━━━━━\n"
         f"🏆 **Prize:** {raffle['prize']}\n"
-        f"💵 **Entry:** {money(raffle['entry_fee'])}\n"
-        f"🎟️ **Claimed:** {claimed}/{raffle['slot_count']} | **Paid:** {paid}/{raffle['slot_count']}\n\n"
+        f"💰 **Donation:** {money(raffle['entry_fee
+                f"📊 **Spots:** {progress_bar} {filled}/{total_slots}\n"
+        f"🏆 **Winners:** 1\n"
+        f"━━━━━━━━━━━━━━━━━━━━\n"
     )
 
-    await interaction.response.send_message(header + chunks[0])
-    for chunk in chunks[1:]:
-        await interaction.followup.send(chunk)
+    slot_text = ""
+    for row in rows:
+        if row["user_id"] is None:
+            name = "OPEN"
+        else:
+            name = row["username"]
 
+        slot_text += f"⭐ {row['slot_number']:02d}. {name}\n"
+
+    message = header + slot_text
+
+    await interaction.response.send_message(message)
 
 @bot.tree.command(name="draw", description="Admin: randomly select a winner from PAID entries.")
 async def draw(interaction: discord.Interaction):
